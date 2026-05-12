@@ -1,3 +1,13 @@
+# Local scraping and investigation scripts
+fetch_*.ps1
+find_*.ps1
+site_temp.html
+
+# Ignore temporary images in the root directory (but NOT in src or public)
+/*.png
+/*.jpg
+/*.jpeg
+
 # Logs
 logs
 *.log
