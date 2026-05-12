@@ -1,6 +1,22 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaYoutube, FaTiktok, FaInstagram } from "react-icons/fa";
 
+// প্রো-লেভেল আর্কিটেকচার: বারবার মাস্ক এবং ট্র্যাক কোড না লিখে একটি ডায়নামিক কম্পোনেন্ট তৈরি করা হয়েছে।
+// hClass এবং tClass এর মাধ্যমে ফন্ট সাইজ অনুযায়ী মাস্কের সাইজ ও ট্রান্সলেশন কন্ট্রোল করা হবে।
+const AnimatedFooterLink = ({ 
+  text, 
+  hClass = "h-6 md:h-7", 
+  tClass = "group-hover:-translate-y-6 md:group-hover:-translate-y-7", 
+  wrapperClass = "" 
+}) => (
+  <a href="#" className={`group inline-flex overflow-hidden ${hClass} ${wrapperClass}`}>
+    <div className={`flex flex-col transition-transform duration-300 ease-in-out ${tClass}`}>
+      <span className={`flex items-center text-white ${hClass}`}>{text}</span>
+      <span className={`flex items-center text-gray-400 ${hClass}`}>{text}</span>
+    </div>
+  </a>
+);
+
 const Footer = () => {
   return (
     <footer className="relative z-20 bg-[#111111] text-white pt-16 md:pt-24 pb-8 px-4 md:px-8 rounded-t-[40px] md:rounded-t-[60px] overflow-hidden">
@@ -40,29 +56,29 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links Section */}
+          {/* Links Section (এখানে AnimatedFooterLink ব্যবহার করা হয়েছে) */}
           <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
             <div className="flex flex-col gap-3 font-semibold text-base md:text-lg tracking-tight">
-              <a href="#" className="hover:text-gray-400 transition-colors">Services</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Work</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">About</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Culture</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Meet The Risers</a>
+              <AnimatedFooterLink text="Services" />
+              <AnimatedFooterLink text="Work" />
+              <AnimatedFooterLink text="About" />
+              <AnimatedFooterLink text="Culture" />
+              <AnimatedFooterLink text="Meet The Risers" />
             </div>
 
             <div className="flex flex-col gap-3 font-semibold text-base md:text-lg tracking-tight">
-              <a href="#" className="hover:text-gray-400 transition-colors">Testimonials</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Blog & Resources</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Webinars</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Careers</a>
+              <AnimatedFooterLink text="Testimonials" />
+              <AnimatedFooterLink text="Blog & Resources" />
+              <AnimatedFooterLink text="Webinars" />
+              <AnimatedFooterLink text="Careers" />
             </div>
 
             <div className="flex flex-col gap-3 font-semibold text-base md:text-lg tracking-tight col-span-2 md:col-span-1 mt-4 md:mt-0">
-              <a href="#" className="hover:text-gray-400 transition-colors">Sheffield</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">Manchester</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">London</a>
-              <a href="#" className="hover:text-gray-400 transition-colors">New York</a>
-              <a href="#" className="hover:text-gray-400 transition-colors mt-4">Contact</a>
+              <AnimatedFooterLink text="Sheffield" />
+              <AnimatedFooterLink text="Manchester" />
+              <AnimatedFooterLink text="London" />
+              <AnimatedFooterLink text="New York" />
+              <AnimatedFooterLink text="Contact" wrapperClass="mt-4" />
             </div>
           </div>
 
@@ -71,7 +87,6 @@ const Footer = () => {
         {/* Big Text */}
         <div className="w-full flex justify-between items-end border-b border-gray-800 pb-8 mb-6">
           <svg className="w-full max-w-full h-auto fill-current" viewBox="0 0 168 21" xmlns="http://www.w3.org/2000/svg">
-            {/* SVG Path extracted from Header */}
             <path d="M91.3152 5.40061C91.3152 3.94241 92.5306 2.67359 93.9881 2.67359C95.7162 2.67359 96.797 3.83419 96.797 5.56225H99.7127C99.7127 2.1873 97.3096 0 93.9874 0C90.9371 0 88.3988 2.32257 88.3988 5.42766C88.3988 9.31596 90.883 10.2344 93.9874 11.4221C95.6627 12.07 97.2007 12.5563 97.2007 14.6895C97.2007 16.634 95.9867 18.0651 93.9874 18.0651C91.8813 18.0651 90.7477 16.3905 90.7477 14.446H87.832C87.832 18.0651 90.3426 20.7381 93.9874 20.7381C97.6323 20.7381 100.118 18.2816 100.118 14.6895C100.118 7.10161 91.3145 9.64061 91.3145 5.40061H91.3152Z"></path>
             <path d="M109.209 4.99609C104.834 4.99609 101.539 8.53405 101.539 12.8539C101.539 17.1737 104.888 20.738 109.155 20.738C112.422 20.738 115.203 18.713 116.337 15.662H113.529C112.718 17.2278 111.017 18.1733 109.262 18.1733C106.806 18.1733 104.915 16.4182 104.348 14.0963H116.743C116.797 13.6371 116.823 13.1508 116.823 12.6922C116.823 8.47926 113.447 4.99609 109.209 4.99609ZM104.348 11.9361C104.509 9.47823 106.751 7.56147 109.181 7.56147C111.611 7.56147 113.853 9.47823 114.014 11.9361H104.348Z"></path>
             <path d="M127.476 5.40039L123.575 16.0941L119.673 5.40039H116.676L122.617 20.3598H124.588L130.475 5.40039H127.476Z"></path>
@@ -89,7 +104,7 @@ const Footer = () => {
           </svg>
         </div>
 
-        {/* Sub Footer */}
+        {/* Sub Footer (এখানেও ছোট সাইজের ফন্টের জন্য কাস্টম hClass দিয়ে একই কম্পোনেন্ট ব্যবহার করা হয়েছে) */}
         <div className="flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs text-gray-500 font-medium">
           <div className="flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start">
             <span>© 2025 Rise at Seven Ltd. All rights reserved</span>
@@ -98,12 +113,27 @@ const Footer = () => {
             <span className="hidden md:inline">•</span>
             <span>VAT Registered GB 322402945</span>
             <span className="hidden md:inline">•</span>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            
+            <AnimatedFooterLink 
+              text="Privacy Policy" 
+              hClass="h-4" 
+              tClass="group-hover:-translate-y-4" 
+            />
+            
             <span className="hidden md:inline">•</span>
-            <a href="#" className="hover:text-white transition-colors">Terms & conditions</a>
+            
+            <AnimatedFooterLink 
+              text="Terms & conditions" 
+              hClass="h-4" 
+              tClass="group-hover:-translate-y-4" 
+            />
           </div>
           <div className="mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Website MadeByShape</a>
+            <AnimatedFooterLink 
+              text="Website MadeByShape" 
+              hClass="h-4" 
+              tClass="group-hover:-translate-y-4" 
+            />
           </div>
         </div>
 
