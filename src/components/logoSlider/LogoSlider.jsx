@@ -19,19 +19,20 @@ const LogoSlider = () => {
   const displayLogos = [...logos, ...logos, ...logos];
 
   return (
-    <div className="w-full bg-[#f0f0f0] py-10 overflow-hidden border-y border-gray-200 select-none">
-      <div className="w-full mx-auto flex md:flex-row flex-col items-center">
+    <div className="w-full bg-[#f0f0f0] py-10 md:py-16 overflow-hidden border-b border-black/10 select-none">
+      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+        
         {/* Left Fixed Text */}
-        <div className="whitespace-nowrap px-10 z-10 bg-[#f0f0f0] shadow-[10px_0_15px_-5px_#f0f0f0]">
-          <p className="text-sm md:text-base font-bold text-black tracking-tight">
-            The agency behind...
+        <div className="shrink-0 z-10 w-full md:w-auto text-left">
+          <p className="text-sm font-medium text-[#111111] tracking-tight sm:max-w-32">
+            The agency behind ...
           </p>
         </div>
 
         {/* Slider Container */}
-        <div className="relative flex-1 overflow-hidden">
+        <div className="relative flex-1 overflow-hidden w-full">
           <motion.div
-            className="flex items-center gap-16 md:gap-24 w-max cursor-grab active:cursor-grabbing"
+            className="flex items-center gap-12 md:gap-20 w-max cursor-grab active:cursor-grabbing"
             drag="x"
             dragConstraints={{ right: 0, left: -2000 }}
             animate={{ x: ["0%", "-33.33%"] }} 
@@ -39,27 +40,30 @@ const LogoSlider = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 20, 
+                duration: 25, 
                 ease: "linear",
-              },
+              }
             }}
           >
             {displayLogos.map((logo, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 opacity-99 hover:opacity-100"
+                className="flex-shrink-0 w-20 md:w-24 aspect-[20/9] flex items-center justify-center transition-all duration-300"
               >
                 <img
                   src={logo.url}
                   alt={logo.name}
-                  className="h-8 md:h-10 w-auto object-contain pointer-events-none"
+                  className="w-full h-full object-contain pointer-events-none brightness-0 opacity-90"
                 />
               </div>
             ))}
           </motion.div>
           
-          <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-[#f0f0f0] to-transparent pointer-events-none z-10" />
+          {/* Edge gradients to blend with background if necessary */}
+          <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-[#f0f0f0] to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 left-0 h-full w-16 bg-gradient-to-r from-[#f0f0f0] to-transparent pointer-events-none z-10 md:hidden" />
         </div>
+
       </div>
     </div>
   );
