@@ -2,6 +2,8 @@
 fetch_*.ps1
 find_*.ps1
 site_temp.html
+site_js.js
+
 
 # Ignore temporary images in the root directory (but NOT in src or public)
 /*.png
